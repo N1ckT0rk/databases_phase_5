@@ -8,10 +8,14 @@ class AlbumRepository:
 
     # Retrieve all artists
     def all(self):
-        rows = self._connection.execute('SELECT * from artists')
+        rows = self._connection.execute('SELECT * from albums')
         artists = []
         for row in rows:
             item = Album(row["id"], row["title"], row["release_year"], row["artist_id"])
             artists.append(item)
         return artists
 
+    def find(self, id):
+        rows = self._connection.execute('SELECT * FROM albums WHERE id = %s', [id])
+        for row in rows:
+            return Album(row["id"], row["title"], row["release_year"], row["artist_id"])
