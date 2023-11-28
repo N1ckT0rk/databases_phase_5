@@ -1,5 +1,5 @@
 from lib.database_connection import DatabaseConnection
-from lib.artist_repository import ArtistRepository
+from lib.book_repository import BookRepository
 
 
 # Connect to the database
@@ -10,7 +10,7 @@ connection.connect()
 connection.seed("seeds/book_store.sql")
 
 # Retrieve all artists
-artist_repository = ArtistRepository(connection)
+artist_repository = BookRepository(connection)
 artists = artist_repository.all()
 
 # List them out
