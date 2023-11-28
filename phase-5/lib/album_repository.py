@@ -15,22 +15,3 @@ class AlbumRepository:
             artists.append(item)
         return artists
 
-    # Find a single album by id
-    def find(self, id):
-        rows = self._connection.execute(
-            'SELECT * from albums WHERE id = %s', [id])
-        row = rows[0]
-        return Album(row["id"], row["title"], row["release_year"], row["artist_id"])
-
-    # Create a new artist
-    # Do you want to get its id back? Look into RETURNING id;
-    def create(self, album):
-        self._connection.execute('INSERT INTO artists (name, genre) VALUES (%s, %s)', [
-                                 album.title, album.release_year, album.artist_id])
-        return None
-
-    # Delete an artist by their id
-    def delete(self, id):
-        self._connection.execute(
-            'DELETE FROM artists WHERE id = %s', [id])
-        return None
